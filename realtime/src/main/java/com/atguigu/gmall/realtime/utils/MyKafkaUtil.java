@@ -23,6 +23,7 @@ public class MyKafkaUtil {
                 //在生产环境中，要想保证生产端的精准一次，消费端不能消费预提交数据，需要设置隔离级别为读已提交
                 .setProperty(ConsumerConfig.ISOLATION_LEVEL_CONFIG, "read_committed")
                 //TODO 默认使用SimpleStringSchema，对kafka消息进行反序列化的时候，如果消息为空，那么处理不了，我们需要自定义反序列化器
+                //.setValueOnlyDeserializer(new SimpleStringSchema())
                 .setValueOnlyDeserializer(new DeserializationSchema<String>() {
                     @Override
                     public String deserialize(byte[] bytes) throws IOException {
